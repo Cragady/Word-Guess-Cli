@@ -1,6 +1,4 @@
-//should ONLY require letters.js
 var Letter = require("./letter");
-var choicedWord = "hooover damn";
 
 function Word(word){
     this.word = word;
@@ -12,35 +10,17 @@ function Word(word){
             letterPass = new Letter(lets[i]);
             letterPass.letter.letterChecker(" ");
             this.letterAct.push(letterPass);
-            wordShower += letterPass.letter.swapper;
+            wordShower += letterPass.letter.swapper + " ";
         }
-        console.log(wordShower);
+        console.log("\x1b[34m" + wordShower + "\n");
     };
     this.charChecker = function(guessered){
         var wordShower = "";
         for(i = 0; i < this.letterAct.length; i++){
             this.letterAct[i].letter.letterChecker(guessered);
-            wordShower += this.letterAct[i].letter.swapper;
+            wordShower += this.letterAct[i].letter.swapper + " ";
         }
         console.log(wordShower);
     } 
 };
-
-newFunk = function(getIt){
-    activeWord = new Word(getIt);
-    activeWord.lettersSpray(getIt);
-    console.log(activeWord);
-    activeWord.charChecker("o");
-    activeWord.charChecker('h');
-    activeWord.charChecker('v');
-    activeWord.charChecker('e');
-    activeWord.charChecker('r');
-    activeWord.charChecker('d');
-    activeWord.charChecker('a');
-    activeWord.charChecker('m');
-    activeWord.charChecker('n');
-    
-}
-// activeWord.letterChecker(activeWord.word, "o");
-newFunk(choicedWord);
-
+module.exports = Word;

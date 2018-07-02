@@ -11,7 +11,7 @@ function Letter(letIn){
             }
         },
         writeWord: function(letterGuessIn){
-            if(this.letter === letterGuessIn || this.letter === " "){
+            if(this.letter === letterGuessIn.toLowerCase() || this.letter === letterGuessIn.toUpperCase() || this.letter === " "){
                 this.letterGuessed = true;
             }
         }
