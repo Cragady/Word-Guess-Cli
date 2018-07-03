@@ -20,7 +20,7 @@ function Word(word){
             this.letterAct[i].letter.letterChecker(guessered);
             wordShower += this.letterAct[i].letter.swapper + " ";
         }
-        console.log(wordShower);
+        console.log("\x1b[34m" + wordShower + "\n");
     } 
 };
 module.exports = Word;
