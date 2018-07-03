@@ -2,7 +2,7 @@ var Word = require("./word");
 var inquirer = require("inquirer");
 var Choiced = require("./word-list");
 var choicedArray = Choiced.choices;
-var wordsGuessed = [1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49];
+var wordsGuessed = [];
 var letterGuessed = [];
 var guessLeft = 10;
 
@@ -10,7 +10,6 @@ gameStarter = function(conti){
     randomizer = Math.floor(Math.random() * choicedArray.length);
     chosenOne = choicedArray[randomizer];
     validKeyPress = "";
-    // validKey();
     if(conti){
         wordsGuessed = [];
         letterGuessed = [];
@@ -67,7 +66,7 @@ ${guessLeft} guess(es) remaining`);
                 console.log("\x1b[33m Letters Guessed: " + writeTheLetters);
                 repeater(wordHere);
             } else if (guessLeft === 1){
-                console.log("Oops");
+                console.log("Oops, game over");
                 gameContinue();
                 return;
             }
@@ -88,6 +87,7 @@ wordFinishChecker = function(objPass){
 Or you played this way too much. . .
 (Or you cheated. . . kidding!)        
 Anywho, CONGRATULATIONS! YOU GUESSED ALL THE WORDS I HAVE!! CRAZY!
+THAT'S LIKE ${choicedArray.length} WORDS!!
 I don't have any special rewards, but you can play again if you like!`);
         gameContinue();
         return;
@@ -95,6 +95,7 @@ I don't have any special rewards, but you can play again if you like!`);
     console.log("This was hit");
     var wordWriter = wordsGuessed.join(", ");
     console.log(`\x1b[32m YES!! Word has been guessed! Congratulations!!
+Number of words guessed: ${wordsGuessed.length}
 Words guessed so far: ${wordWriter}
 Guesses remaining: ${guessLeft}, good luck!`);
     gameStarter();
@@ -117,13 +118,3 @@ gameContinue = function(){
 };
 
 gameStarter();
-//FgRed = "\x1b[31m"
-//FgGreen = "\x1b[32m"
-//Reset = "\x1b[0m"
-//FgWhite = "\x1b[37m"
-//FgBlue = "\x1b[34m"
-
-// console.log("\x1b[31m Hello World!");
-// console.log("hi");
-// console.log("\x1b[32m hello again! ");
-// console.log("\x1b[37m hello");
