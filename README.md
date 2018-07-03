@@ -1,18 +1,22 @@
 **Purpose**
+
 To create a command line application that utilizes constructors stored in separate javascript files alongside the node package module `inquirer` for the purpose of a word guessing game.
 
 The constructors are referenced by using node's `require`. A javascript file named `words-list` is also referenced, `words-list` stores random words to be randomly chosen by `index.js`.
 
 **Installation/Keys**
+
 `package.json` specifies the npm dependency required for this application to work. Run `npm install` on the command line, OR `npm install <package name(s) here>` for functionality.
 
 **Word Guess Demo**
 <img src="gifs-pics/word-guess-functioning.gif" width="700" height="500" alt="Word Guess Demo">
 
 **letter.js**
+
 Constructs a letter object. This stores the letter, if the letter has been guessed as a value, a function that displays the letter or `_` depending on if the letter has been guessed, and a function that changes the boolean value stored if the letter has been guessed.
 
 **word.js**
+
 `word.js` references `letter.js` to construct a new object for every letter in the word that is passed to `word.js`'s constructor. Each letter object is pushed to an array here to keep track of each letter's object. `function Word()` stores the word, the letter objects, has the functions `lettersSpray()` and `charChecker()`.
 
   * **lettersSpray()**
@@ -30,15 +34,19 @@ Constructs a letter object. This stores the letter, if the letter has been guess
     *  gameContinue()
 
   * **gameStarter()**
-  Has a randomizer that is put into the index slot for a variable that requires the `word-list.js` (where all the words are stored) to select a word at random to pass as an argument in `repeater()` and `lettersSpray()` after being passed as an argument for the constructor stored in `word.js`. 
+
+    Has a randomizer that is put into the index slot for a variable that requires the `word-list.js` (where all the words are stored) to select a word at random to pass as an argument in `repeater()` and `lettersSpray()` after being passed as an argument for the constructor stored in `word.js`. 
 
   * **repeater()**
-  Prompts the user for their guess. The prompt has a `validate()` function that makes sure the user can't have any non alphabetic characters as a guess, that there is an input, that there isn't more than one character in the input, and makes sure that the input hasn't previously been inputted for the same word.
 
-  As it is so aptly named, this repeats. Every time the user enters a guess, it is called again; `repeater()` calls itself until the user guesses the word correctly, loses the game, or runs out of words to guess. The only case `repeater()` does not call itself is when the user guesses a letter correctly. When the user guesses the word correctly, `wordFinishChecker()` is called. `wordFinishChecker()` will call `repeater()` if the word hasn't been fully guessed.
+    Prompts the user for their guess. The prompt has a `validate()` function that makes sure the user can't have any non alphabetic characters as a guess, that there is an input, that there isn't more than one character in the input, and makes sure that the input hasn't previously been inputted for the same word.
+
+    As it is so aptly named, this repeats. Every time the user enters a guess, it is called again; `repeater()` calls itself until the user guesses the word correctly, loses the game, or runs out of words to guess. The only case `repeater()` does not call itself is when the user guesses a letter correctly. When the user guesses the word correctly, `wordFinishChecker()` is called. `wordFinishChecker()` will call `repeater()` if the word hasn't been fully guessed.
 
 * **wordFinishChecker**
-When the word is fully guessed, the completed word is pushed to `wordsGuessed`. If there are still words to guess, `gameStarter()` will be called to initialize a new word. If there are no more words to be guessed, `gameStarter()` is called if the user, for some reason, wants to play the entire game again.
 
-  * **gameContinue()**
+  When the word is fully guessed, the completed word is pushed to `wordsGuessed`. If there are still words to guess, `gameStarter()` will be called to initialize a new word. If there are no more words to be guessed, `gameStarter()` is called if the user, for some reason, wants to play the entire game again.
+
+* **gameContinue()**
+
   Resets variables that keeps track of words guessed correctly, guesses remaining, and letters guessed in the event of a game over or guessing all of the words. Restarts the Game. If the user selects no, the application is exited.
