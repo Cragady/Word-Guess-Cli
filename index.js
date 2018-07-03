@@ -6,7 +6,7 @@ var wordsGuessed = [];
 var letterGuessed = [];
 var guessLeft = 10;
 
-gameStarter = function(conti){
+gameStarter = function(){
     randomizer = Math.floor(Math.random() * choicedArray.length);
     chosenOne = choicedArray[randomizer];
     if(wordsGuessed.includes(chosenOne)){

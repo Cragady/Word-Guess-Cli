@@ -50,3 +50,8 @@ Constructs a letter object. This stores the letter, if the letter has been guess
 * **gameContinue()**
 
   Resets variables that keeps track of words guessed correctly, guesses remaining, and letters guessed in the event of a game over or guessing all of the words. Restarts the Game. If the user selects no, the application is exited.
+
+
+**Problem**
+
+If the array that feeds the words to the index.js file is too big, the game breaks when all but one word have been guessed.
