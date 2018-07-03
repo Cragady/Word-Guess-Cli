@@ -9,20 +9,17 @@ var guessLeft = 10;
 gameStarter = function(conti){
     randomizer = Math.floor(Math.random() * choicedArray.length);
     chosenOne = choicedArray[randomizer];
-    validKeyPress = "";
-    if(conti){
-        wordsGuessed = [];
-        letterGuessed = [];
-        guessLeft = 10;
-        var wordGetter = new Word(chosenOne);
-        wordGetter.lettersSpray(chosenOne);
-        repeater(wordGetter);
-    } else {
-        letterGuessed = [];
-        var wordGetter = new Word(chosenOne);
-        wordGetter.lettersSpray(chosenOne);
-        repeater(wordGetter);
+    if(wordsGuessed.includes(chosenOne)){
+        setTimeout(function(){
+            gameStarter();
+        }, 0);
+        return;
     }
+    validKeyPress = "";
+    letterGuessed = [];
+    var wordGetter = new Word(chosenOne);
+    wordGetter.lettersSpray(chosenOne);
+    repeater(wordGetter);
 }
 
 repeater = function(wordHere){
@@ -83,7 +80,8 @@ wordFinishChecker = function(objPass){
     }
     wordsGuessed.push(objPass.word);
     if(wordsGuessed.length === choicedArray.length){
-        console.log(`\x1b[32m Wow. . . You're pretty much a god at this huh?
+        console.log(`\x1b[32m Words guessed: ${wordWriter}
+Wow. . . You're pretty much a god at this huh?
 Or you played this way too much. . .
 (Or you cheated. . . kidding!)        
 Anywho, CONGRATULATIONS! YOU GUESSED ALL THE WORDS I HAVE!! CRAZY!
@@ -92,13 +90,13 @@ I don't have any special rewards, but you can play again if you like!`);
         gameContinue();
         return;
     }
-    console.log("This was hit");
     var wordWriter = wordsGuessed.join(", ");
     console.log(`\x1b[32m YES!! Word has been guessed! Congratulations!!
 Number of words guessed: ${wordsGuessed.length}
 Words guessed so far: ${wordWriter}
 Guesses remaining: ${guessLeft}, good luck!`);
     gameStarter();
+    return;
 };
 
 gameContinue = function(){
@@ -110,7 +108,11 @@ gameContinue = function(){
         }
     ]).then(answer =>{
         if(answer.continue){
-            gameStarter(true);
+            wordsGuessed = [];
+            guessLeft = 10;
+            setTimeout(function(){
+                gameStarter();
+            }, 0);
         } else {
             return;
         }

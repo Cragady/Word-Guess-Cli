@@ -22,3 +22,23 @@ Constructs a letter object. This stores the letter, if the letter has been guess
   Checks the guessed letter passed to it and changes the character to reflect the underlying letter if the guess is correct, then logs the result to the console. It would display something like this: `_ _ s s _   _ _ _   _ s s _ _` if s was passed to `charChecker()` and was correct.
 
 **index.js**
+`index.js` runs the game utilizing the `inquirer` npm and recursion so the user can keep playing the game until the user decides to stop playing.
+  * **functions**
+    *  gameStarter()
+    *  repeater()
+    *  wordFinishChecker()
+    *  gameContinue()
+
+  * **gameStarter()**
+  Has a randomizer that is put into the index slot for a variable that requires the `word-list.js` (where all the words are stored) to select a word at random to pass as an argument in `repeater()` and `lettersSpray()` after being passed as an argument for the constructor stored in `word.js`. 
+
+  * **repeater()**
+  Prompts the user for their guess. The prompt has a `validate()` function that makes sure the user can't have any non alphabetic characters as a guess, that there is an input, that there isn't more than one character in the input, and makes sure that the input hasn't previously been inputted for the same word.
+
+  As it is so aptly named, this repeats. Every time the user enters a guess, it is called again; `repeater()` calls itself until the user guesses the word correctly, loses the game, or runs out of words to guess. The only case `repeater()` does not call itself is when the user guesses a letter correctly. When the user guesses the word correctly, `wordFinishChecker()` is called. `wordFinishChecker()` will call `repeater()` if the word hasn't been fully guessed.
+
+* **wordFinishChecker**
+When the word is fully guessed, the completed word is pushed to `wordsGuessed`. If there are still words to guess, `gameStarter()` will be called to initialize a new word. If there are no more words to be guessed, `gameStarter()` is called if the user, for some reason, wants to play the entire game again.
+
+  * **gameContinue()**
+  Resets variables that keeps track of words guessed correctly, guesses remaining, and letters guessed in the event of a game over or guessing all of the words. Restarts the Game. If the user selects no, the application is exited.
