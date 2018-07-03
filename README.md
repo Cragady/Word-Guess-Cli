@@ -19,6 +19,6 @@ Constructs a letter object. This stores the letter, if the letter has been guess
   Runs the `Letter()` constructor on each letter of the word passed to it, stores the object in the array `letterAct` and then runs the function `letterChecker()` in each letter object then logs the values returned from each letter to display something like this: `_ _ _ _ _   _ _ _   _ _ _ _ _` for a blank letter.
 
   * **charChecker()**
-  Checks the guessed letter passed to it and changes the character to reflect the underlying letter if the guess is correct, then logs the result to the console. It would display something like this: `_ _ s s _   _ _ _   _ _ s _ _` if s was passed to `charChecker()` and was correct.
+  Checks the guessed letter passed to it and changes the character to reflect the underlying letter if the guess is correct, then logs the result to the console. It would display something like this: `_ _ s s _   _ _ _   _ s s _ _` if s was passed to `charChecker()` and was correct.
 
 **index.js**
