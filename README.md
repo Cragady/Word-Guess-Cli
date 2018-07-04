@@ -54,4 +54,4 @@ Constructs a letter object. This stores the letter, if the letter has been guess
 
 **Problem**
 
-If the array that feeds the words to the index.js file is too big, the game breaks when all but one word have been guessed.
+If the array that feeds the words to the index.js file is too big, the game breaks when a certain number of words have been guessed. With my testing, I have found it breaks at 49 words being correctly guessed. I shortened the word list to rectify this, later testing is necessary to figure out the underlying problem. Could have something to do with how recursive the code is.
