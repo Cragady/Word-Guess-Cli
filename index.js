@@ -44,7 +44,7 @@ function repeater(wordHere){
         function letterWriter(){
             wordHere.charChecker(answer.lettered)
         };
-        for(i = 0; i < wordHere.letterAct.length; i++){
+        for(var i = 0; i < wordHere.letterAct.length; i++){
             if(answer.lettered.toLowerCase() === wordHere.letterAct[i].letter.letter.toLowerCase()){
                 console.log("\x1b[32m CORRECT!! Congratulations!")
                 letterGuessed.push(answer.lettered);
@@ -72,7 +72,7 @@ ${guessLeft} guess(es) remaining`);
 };
 
 function wordFinishChecker(objPass){
-    for(i = 0; i < objPass.letterAct.length; i++){
+    for(var i = 0; i < objPass.letterAct.length; i++){
         if(objPass.letterAct[i].letter.letterGuessed === false){
             repeater(objPass);
             return;
