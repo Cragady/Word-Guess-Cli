@@ -6,30 +6,29 @@ var wordsGuessed = [];
 var letterGuessed = [];
 var guessLeft = 10;
 
-gameStarter = function(){
-    randomizer = Math.floor(Math.random() * choicedArray.length);
-    chosenOne = choicedArray[randomizer];
+function gameStarter (){
+    var randomizer = Math.floor(Math.random() * choicedArray.length);
+    var chosenOne = choicedArray[randomizer];
     if(wordsGuessed.includes(chosenOne)){
         setTimeout(function(){
             gameStarter();
         }, 0);
         return;
     }
-    validKeyPress = "";
     letterGuessed = [];
     var wordGetter = new Word(chosenOne);
     wordGetter.lettersSpray(chosenOne);
     repeater(wordGetter);
 }
 
-repeater = function(wordHere){
+function repeater(wordHere){
     inquirer.prompt([
         {
             name: "lettered",
             message: "\x1b[37m Guess a letter!",
             validate: function(input){ 
                 var validInput = /^[A-Za-z]+$/;
-                inputSplitter = input.split("");   
+                var inputSplitter = input.split("");   
                 if(!input){
                     return "You must input something."
                 } else if (letterGuessed.includes(input.toLowerCase()) || letterGuessed.includes(input.toUpperCase())) {
@@ -41,7 +40,8 @@ repeater = function(wordHere){
             }
         }
     ]).then(answer =>{
-        letterWriter = function(){
+        
+        function letterWriter(){
             wordHere.charChecker(answer.lettered)
         };
         for(i = 0; i < wordHere.letterAct.length; i++){
@@ -49,7 +49,7 @@ repeater = function(wordHere){
                 console.log("\x1b[32m CORRECT!! Congratulations!")
                 letterGuessed.push(answer.lettered);
                 letterWriter();
-                writeTheLetters = letterGuessed.join(", ");
+                var writeTheLetters = letterGuessed.join(", ");
                 console.log("\x1b[33m Letters Guessed: " + writeTheLetters);
                 wordFinishChecker(wordHere);
                 return;
@@ -59,7 +59,7 @@ repeater = function(wordHere){
 ${guessLeft} guess(es) remaining`);
                 letterGuessed.push(answer.lettered);
                 letterWriter();
-                writeTheLetters = letterGuessed.join(", ");
+                var writeTheLetters = letterGuessed.join(", ");
                 console.log("\x1b[33m Letters Guessed: " + writeTheLetters);
                 repeater(wordHere);
             } else if (guessLeft === 1){
@@ -71,7 +71,7 @@ ${guessLeft} guess(es) remaining`);
     });
 };
 
-wordFinishChecker = function(objPass){
+function wordFinishChecker(objPass){
     for(i = 0; i < objPass.letterAct.length; i++){
         if(objPass.letterAct[i].letter.letterGuessed === false){
             repeater(objPass);
@@ -99,7 +99,7 @@ Guesses remaining: ${guessLeft}, good luck!`);
     return;
 };
 
-gameContinue = function(){
+function gameContinue(){
     inquirer.prompt([
         {
             name: "continue",
